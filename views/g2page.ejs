@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/head'); -%>
+
+    <body>
+        <%- include('layouts/navigation'); -%>
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>G2 Page</h1>
+                                <span class="subheading">DriveTest Booking Kiosk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Main Content-->
+            <div class="container px-4 px-lg-5 mb-5">
+                <% if(typeof success !='undefined' && typeof user.firstName !='' ) { %>
+                    <p class="text-success">
+                        <%= success %>
+                    </p>
+                    <% } %>
+
+                    <% if(typeof user !='undefined' && user.testType =='G2') { %>
+                        <p class="text-success">
+                           G2 Test Slot Booked
+                        </p>
+                        <% } %>
+                        <% if(typeof user !='undefined' && user.firstName !='' ) { %>
+                            <div class="container px-4 px-lg-5 mb-5">
+                                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                                    <div class="col-md-10 col-lg-8 col-xl-7">
+                                        <form action="/updateUser" method="post">
+                                            <div class="card mb-3">
+                                                <div class="card-header">
+                                                    <h5 class="card-title">Personal Information</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="firstName">First Name</label>
+                                                                <input type="text" class="form-control" id="firstName"
+                                                                    value="<%= user.firstName %>"
+                                                                    placeholder="Enter First Name" name="firstName"
+                                                                    readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+
+                                                            <div class="form-group">
+                                                                <label for="lastName">Last Name</label>
+                                                                <input type="text" class="form-control" id="lastName"
+                                                                    value="<%= user.lastName %>"
+                                                                    placeholder="Enter Last Name" name="lastName"
+                                                                    readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="licenseNumber">License Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="licenseNumber" value="<%= user.licenseNumber %>"
+                                                                    placeholder="Enter License Number"
+                                                                    name="licenseNumber" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+
+                                                            <div class="form-group">
+                                                                <label for="age">Age</label>
+                                                                <input type="number" class="form-control" id="age"
+                                                                    min="1" max="200" step="1" placeholder="Enter Age"
+                                                                    name="age" readonly value="<%= user.age %>">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card mb-3">
+                                                <div class="card-header">
+                                                    <h5 class="card-title">Car Information</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="make">Make</label>
+                                                                <input type="text" class="form-control" id="make"
+                                                                    name="make" placeholder="Enter Make" required
+                                                                    value="<%= user.car_details.make %>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+
+                                                            <div class="form-group">
+                                                                <label for="model">Model</label>
+                                                                <input type="text" class="form-control" id="model"
+                                                                    name="model" placeholder="Enter Model" required
+                                                                    value="<%= user.car_details.model %>">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="year">Year</label>
+                                                                <input class="form-control" id="year" name="year"
+                                                                    type="number" min="1900" max="2099" step="1"
+                                                                    placeholder="Enter Year" required
+                                                                    value="<%= user.car_details.year %>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+
+                                                            <div class="form-group">
+                                                                <label for="platNumber">Plat Number</label>
+                                                                <input type="text" class="form-control" id="platNumber"
+                                                                    name="platNumber" placeholder="Enter Plat Number"
+                                                                    required value="<%= user.car_details.platNumber %>">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                                <% if(typeof user !='undefined' && user.firstName=='' ) { %>
+                                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                                        <div class="col-md-10 col-lg-8 col-xl-7">
+                                            <form action="/updateUser" method="post">
+                                                <div class="card mb-3">
+                                                    <div class="card-header">
+                                                        <h5 class="card-title">Personal Information</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="firstName">First Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="firstName" placeholder="Enter First Name"
+                                                                        name="firstName" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+
+                                                                <div class="form-group">
+                                                                    <label for="lastName">Last Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="lastName" placeholder="Enter Last Name"
+                                                                        name="lastName" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="licenseNumber">License Number</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="licenseNumber"
+                                                                        placeholder="Enter License Number"
+                                                                        name="licenseNumber" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="age">Age</label>
+                                                                    <input type="number" class="form-control" id="age"
+                                                                        min="1" max="200" step="1"
+                                                                        placeholder="Enter Age" name="age" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card mb-3">
+                                                    <div class="card-header">
+                                                        <h5 class="card-title">Car Information</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="make">Make</label>
+                                                                    <input type="text" class="form-control" id="make"
+                                                                        name="make" placeholder="Enter Make" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+
+                                                                <div class="form-group">
+                                                                    <label for="model">Model</label>
+                                                                    <input type="text" class="form-control" id="model"
+                                                                        name="model" placeholder="Enter Model" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="year">Year</label>
+                                                                    <input class="form-control" id="year" name="year"
+                                                                        type="number" min="1900" max="2099" step="1"
+                                                                        placeholder="Enter Year" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+
+                                                                <div class="form-group">
+                                                                    <label for="platNumber">Plat Number</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="platNumber" name="platNumber"
+                                                                        placeholder="Enter Plat Number" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                        <% if(typeof date !='undefined' && typeof user !='undefined' && user.testType =='') { %>
+                                            <div class="row gx-4 gx-lg-5 justify-content-center">
+                                                <div class="col-md-10 col-lg-8 col-xl-7">
+                                                    <form action="/fetchSlots" method="post" id="fetch">
+                                                        <div class="card mb-3">
+                                                            <div class="card-header">
+                                                                <h5 class="card-title">Book Slot</h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row mb-3">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label for="date">Date</label>
+
+                                                                            <input type="date" class="form-control"
+                                                                                id="date" value="<%= date %>"
+                                                                                placeholder="Enter date" name="date"
+                                                                                required>
+                                                                                <input class="form-control"
+                                                                                id="testType" value="G2"
+                                                                               name="testType"
+                                                                                hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <button type="submit" class="btn btn-primary btn-sm">Fetch
+                                                                Slot</button>
+                                                    </form>
+
+                                                    <form action="/bookSlot" method="post" id="bookSlot">
+                                                        <div class="card mb-3">
+                                                            <div class="card-header">
+                                                                <h5 class="card-title">Book Slot</h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row mb-3">
+                                                                    <div class="col" style="visibility: none">
+                                                                        <div class="form-group">
+                                                                            <input type="date" class="form-control"
+                                                                                id="date" value="<%= date %>"
+                                                                                placeholder="Enter date" name="date"
+                                                                                hidden>
+                                                                                <input class="form-control"
+                                                                                id="testType" value="G2"
+                                                                               name="testType"
+                                                                                hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label for="slot">Slots</label>
+                                                                                <select id="slot" name="slot" required
+                                                                                    class="form-control">
+                                                                                    <%for ( var i=0; i < slots.length;
+                                                                                        i++ ){%>
+                                                                                        <option
+                                                                                            value="<%=slots[ i ].time %>">
+                                                                                            <%=slots[i].label %>
+                                                                                        </option>
+                                                                                        <%}%>
+                                                                                </select>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <button type="submit" class="btn btn-primary btn-sm">Book
+                                                                Slot</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <% } %>
+
+            </div>
+            <%- include('layouts/footer'); -%>
+    </body>
+
+</html>

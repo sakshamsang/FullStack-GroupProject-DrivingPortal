@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/head'); -%>
+
+    <body>
+        <%- include('layouts/navigation'); -%>
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>Admin Report</h1>
+                                <span class="subheading">DriveTest Booking Kiosk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Main Content-->
+                        <% if(typeof allUsers !='undefined' ) { %>
+                            <div class="container mb-5">
+                                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                                    <div class="col-md-10 col-lg-8 col-xl-7">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <td>S No</td>
+                                                    <td>First Name</td>
+                                                    <td>Last Name</td>
+                                                    <td>License Number</td>
+                                                    <td>Slot Date/Time</td>
+                                                    <td>Test Type</td>
+                                                    <td>Status</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%for ( var i=0; i < allUsers.length;
+                                                i++ ){%>
+                                                    <tr>
+                                                        <td>  <%= (i + 1) %></td>
+                                                        <td>  <%=allUsers[i].firstName %></td>
+                                                        <td>  <%=allUsers[i].lastName %></td>
+                                                        <td>  <%=allUsers[i].licenseNumber %></td>
+                                                        <td>  <%=allUsers[i].slot_date %> -  <%=allUsers[i].slot_time %></td>
+                                                        <td>  <%=allUsers[i].testType %></td>
+                                                        <td>  <%=allUsers[i].testStatus %></td>
+                                                    </tr>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+
+                </div>
+                <%- include('layouts/footer'); -%>
+    </body>
+</html>

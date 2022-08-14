@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/head'); -%>
+
+    <body>
+        <%- include('layouts/navigation'); -%>
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>Examiner</h1>
+                                <span class="subheading">DriveTest Booking Kiosk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Main Content-->
+            <% if(typeof user !='undefined' && user.testType =='G') { %>
+                <p class="text-success">
+                   G Test Slot Booked
+                </p>
+                <% } %>
+                        <% if(typeof user !='undefined' ) { %>
+                            <div class="container px-4 px-lg-5 mb-5">
+                                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                                    <div class="col-md-10 col-lg-8 col-xl-7">
+                                        <div class="form-group  mb-3">
+                                            <label for="userType">Users</label>
+                                            <select class="form-control" id="user" name="user"
+                                                placeholder="Please select user" required onchange="handleChange()">
+                                                <option value="">Please select user</option>
+                                                <%for ( var i=0; i < allUsers.length;
+                                                i++ ){%>
+                                                <option
+                                                    value="<%=JSON.stringify(allUsers[i]) %>">
+                                                    <%=allUsers[i].firstName %>
+                                                    <%=allUsers[i].lastName %>
+                                                </option>
+                                                <%}%>
+                                            </select>
+                                        </div>
+                                        <form action="/updateExaminer" method="post" class="d-none" id="examiner-form">
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="firstName">First Name</label>
+                                                        <input type="text" class="form-control"
+                                                            id="firstName" name="firstName" readonly>
+                                                            <input type="text" class="form-control"
+                                                            id="userId" name="userId" hidden>
+                                                            
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="lastName">Last Name</label>
+                                                        <input type="text" class="form-control"
+                                                            id="lastName" name="lastName" readonly>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="licenseNumber">License Number</label>
+                                                            <input type="text" class="form-control"
+                                                                id="licenseNumber" name="licenseNumber" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="testType">Test Type</label>
+                                                            <input type="testType" class="form-control"
+                                                                id="testType" name="testType" readonly>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="slotDate">Slot Date</label>
+                                                                <input type="slotDate" class="form-control"
+                                                                    id="slotDate" name="slotDate" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="slotTime">Slot Time</label>
+                                                                <input type="slotTime" class="form-control"
+                                                                    id="slotTime" name="slotTime" readonly>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="testStatus">Test Status</label>
+                                                                    <select class="form-control" id="testStatus" name="testStatus"
+                                                                    placeholder="Please select Test Status" required>
+                                                                    <option value="">Please select Status</option>
+                                                                    <option value="Pass">Pass</option>
+                                                                    <option value="Fail">Fail</option>
+                                                                </select>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="comments">Comments</label>
+                                                                    <textarea  class="form-control"
+                                                                        id="comments" name="comments" required></textarea>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+
+                </div>
+                <%- include('layouts/footer'); -%>
+    </body>
+
+
+    <script>
+        function handleChange(){
+            let value = document.getElementById('user').value;
+            if(value){
+                value = JSON.parse(value);
+                document.getElementById('userId').value = value._id;
+                document.getElementById('firstName').value = value.firstName;
+                document.getElementById('lastName').value = value.lastName;
+                document.getElementById('licenseNumber').value = value.licenseNumber;
+                document.getElementById('testType').value = value.testType;
+                document.getElementById('slotDate').value = value.slot_date;
+                document.getElementById('slotTime').value = value.slot_time;
+                document.getElementById('examiner-form').classList.remove('d-none');
+            }else{
+                document.getElementById('examiner-form').classList.add('d-none');
+            }
+            console.log(value)
+        }
+    </script>
+</html>

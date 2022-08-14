@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/head'); -%>
+
+    <body>
+        <%- include('layouts/navigation'); -%>
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>G2 Page</h1>
+                                <span class="subheading">DriveTest Booking Kiosk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Main Content-->
+            <div class="container px-4 px-lg-5 mb-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <form action="/fetchSlots" method="post">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="card-title">Book Slot</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="date">Date</label>
+                                                <!-- value="<%= user %>" -->
+                                                
+                                                <input type="date" class="form-control" id="date"
+                                                    placeholder="Enter date" name="date"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-sm">Fetch Slots</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <%- include('layouts/footer'); -%>
+    </body>
+
+</html>
