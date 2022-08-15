@@ -15,7 +15,7 @@ const AppointmentSave = async function (req, res) {
                  data.push(response)
             }
             console.log(data)
-            res.render('appointment', { user: { userType, _id: id }, message: "Saved Successfully!" });;
+            res.render('index', { user: { userType, _id: id }, message: "Saved Successfully!" });;
             return;
         }
         res.render('index');
