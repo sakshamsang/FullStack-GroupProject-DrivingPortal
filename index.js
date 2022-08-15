@@ -54,8 +54,13 @@ app.use('/getUser', loginValidation);
 app.use('/updateUser', updateUserValidation);
 
 
-app.listen(3000, function () {
-    console.log('App listening on 3000')
+let port = process.env.PORT;
+if (port == nul || port == ""){
+    port = 3000;
+}
+
+app.listen(port, ()=>{
+    console.log('App Listening')
 })
 
 mongoose.connect('mongodb+srv://ksirimalla:Mongodb@cluster0.v4s3k.mongodb.net/?retryWrites=true&w=majority', { dbName: 'driveTest' });
