@@ -13,7 +13,7 @@ const UpdateExaminer = async function (req, res) {
     req.session.userId = id;
     req.session.userType = userType;
 
-    res.render('index', { success: "User updated successfully!", user });
+    res.render('index', { success: "User updated successfully!", user: {_id:id,userType:userType} });
 
 }
 module.exports = UpdateExaminer;

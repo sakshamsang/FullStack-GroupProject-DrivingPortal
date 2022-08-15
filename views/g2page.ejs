@@ -19,17 +19,26 @@
             </header>
             <!-- Main Content-->
             <div class="container px-4 px-lg-5 mb-5">
+                <% if(typeof user !='undefined' && user.testType =='G2' && user.testStatus !='') { %>
+                    <p class="text-success">
+                        You <%=user.testStatus %> the G2 drive test.
+                    </p>
+                    <p class="text-success">
+                        Comments: <%=user.comments %>
+                    </p>
+                    <% } else if(typeof user !='undefined' && user.testType =='G2') { %>
+                <p class="text-success">
+                   G2 Test Slot Booked
+                </p>
+                <% } %>
+            </div>
+            
+            <div class="container px-4 px-lg-5 mb-5">
                 <% if(typeof success !='undefined' && typeof user.firstName !='' ) { %>
                     <p class="text-success">
                         <%= success %>
                     </p>
                     <% } %>
-
-                    <% if(typeof user !='undefined' && user.testType =='G2') { %>
-                        <p class="text-success">
-                           G2 Test Slot Booked
-                        </p>
-                        <% } %>
                         <% if(typeof user !='undefined' && user.firstName !='' ) { %>
                             <div class="container px-4 px-lg-5 mb-5">
                                 <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
@@ -240,7 +249,8 @@
                                         </div>
                                     </div>
                                     <% } %>
-                                        <% if(typeof date !='undefined' && typeof user !='undefined' && user.testType =='') { %>
+                                        <% if(typeof date !='undefined' && typeof user !='undefined' && user.firstName !='' 
+                                            && (user.testType =='' || (user.testType =='G2' && user.testStatus == "Fail"))) { %>
                                             <div class="row gx-4 gx-lg-5 justify-content-center">
                                                 <div class="col-md-10 col-lg-8 col-xl-7">
                                                     <form action="/fetchSlots" method="post" id="fetch">

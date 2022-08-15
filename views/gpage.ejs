@@ -19,7 +19,7 @@
             </header>
             <!-- Main Content-->
             <div class="container px-4 px-lg-5 mb-5">
-                <% if(typeof user !='undefined' && user.testStatus !='') { %>
+                <% if(typeof user !='undefined' && user.testType =='G' && user.testStatus !='') { %>
                     <p class="text-success">
                         You <%=user.testStatus %> the drive test.
                     </p>
@@ -143,7 +143,10 @@
                             <% } %>
 
 
-                            <% if(typeof date !='undefined' && typeof user !='undefined' && user.testType =='G2') { %>
+                            <% if(typeof date !='undefined' && typeof user !='undefined'  && (
+                             (user.testType =='G2' && user.testStatus =='Pass') ||
+                             (user.testType =='G' && user.testStatus =='Fail')
+                             )) { %>
                                 <div class="container px-4 px-lg-5 mb-5">
                                 <div class="row gx-4 gx-lg-5 justify-content-center">
                                     <div class="col-md-10 col-lg-8 col-xl-7">

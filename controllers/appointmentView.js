@@ -11,7 +11,13 @@ const GetAppointment = async function (req, res) {
         }
         const slots = await Appointment.find({date: searchDate});
         const timeList = slots.map(slot => slot.time);
-        const filteredSlots = ALL_SLOTS.filter(slot => !timeList.includes(slot.label));
+        const filteredSlots = ALL_SLOTS.map(slot => {
+            return {
+                label:slot.label, 
+                id:slot.id,
+                disable: timeList.includes(slot.label)
+            };
+        });
         res.render('appointment', { user: { userType, _id: id },slots:filteredSlots,date:searchDate });
 }
 
@@ -26,6 +32,7 @@ const ALL_SLOTS =  [
     { label: "12:30", id: "time_12_30" },
     { label: "13:00", id: "time_13_00" },
     { label: "13:30", id: "time_13_30" },
-    { label: "14:00", id: "time_14_30" },
+    { label: "14:00", id: "time_14_00" },
+    { label: "14:30", id: "time_14_30" },
   ];
 module.exports = GetAppointment;

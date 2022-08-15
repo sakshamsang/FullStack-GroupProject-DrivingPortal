@@ -10,18 +10,17 @@ const BookSlot = async function (req, res) {
     const time = String(req.body.slot).substring(5).replace("_", ":");
     const slotBody = {
         date: req.body.date,
-        time:time
+        time: time
     }
-    const slot= await Appointment.findOne(slotBody);
-    const slotupdate = await Appointment.findByIdAndUpdate(slot._id, {isTimeSlotAvailable:false}, { new: true });
-    const user = await User.findByIdAndUpdate(id, {slot_id:slot._id,testType:req.body.testType}, { new: true });
-    if(req.body.testType == "G2"){
-        res.render('g2page', { success: "Booked slot succesfully!",
-        user: user, slots:[], date: req.body.date } );
-    }else{
-        res.render('gpage', { success: "Booked slot succesfully!",
-            user: user, slots:[], date: req.body.date } );
-    }
+    const slot = await Appointment.findOne(slotBody);
+    const slotupdate = await Appointment.findByIdAndUpdate(slot._id, { isTimeSlotAvailable: false }, { new: true });
+    const user = await User.findByIdAndUpdate(id, {
+        slot_id: slot._id,
+        testType: req.body.testType,
+        testStatus: "",
+        comments: "",
+    }, { new: true });
+    res.render('index', { success: "Booked slot succesfully!", user: user, });
 };
 
 module.exports = BookSlot;

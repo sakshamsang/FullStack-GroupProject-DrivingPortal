@@ -60,8 +60,13 @@
                                                     i++ ){%>
                                                     <div class="col-2">
                                                         <div class="form-group">
-                                                            <input type="checkbox" id="<%= slots[i].id %>" name="<%= slots[i].id %>">
-                                                            <label for="<%= slots[i].id %>"><%= slots[i].label %></label>
+                                                            <%if ( slots[i].disable == true ){%>
+                                                            <input type="checkbox" id="<%= slots[i].id %>" name="<%= slots[i].id %>" disabled="<%= slots[i].disable %>">
+                                                            <label for="<%= slots[i].id %>" class="text-decoration-line-through text-secondary"><%= slots[i].label %></label>
+                                                            <%} else {%>
+                                                                <input type="checkbox" id="<%= slots[i].id %>" name="<%= slots[i].id %>">
+                                                                <label for="<%= slots[i].id %>"><%= slots[i].label %></label>
+                                                            <%}%>
                                                         </div>
                                                     </div>
                                                     <%}%>
