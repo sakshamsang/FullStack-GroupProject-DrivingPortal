@@ -54,14 +54,9 @@ app.use('/getUser', loginValidation);
 app.use('/updateUser', updateUserValidation);
 
 
-let port = process.env.PORT;
-if (port == nul || port == ""){
-    port = 3000;
-}
-
-app.listen(port, ()=>{
-    console.log('App Listening')
-})
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
 
 mongoose.connect('mongodb+srv://ksirimalla:Mongodb@cluster0.v4s3k.mongodb.net/?retryWrites=true&w=majority', { dbName: 'driveTest' });
 mongoose.connection.on("connected", () => {
